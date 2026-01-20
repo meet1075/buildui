@@ -47,7 +47,6 @@ export const onBoardUser = async () => {
     };
   }
 };
-
 export const getCurrentUser = async () => {
   try {
     const user = await currentUser();
