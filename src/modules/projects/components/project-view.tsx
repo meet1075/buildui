@@ -11,8 +11,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import ProjectHeader from "@/modules/home/components/project-header";
+import MessageContainer from "@/modules/home/components/message-container";
+import type { Fragment } from "@/generated/prisma/client";
 
 const ProjectView = ({ projectId }: { projectId: string }) => {
+    const [activeFragment, setActiveFragment] = useState<Fragment | null>(null)
   return (
     <div className="h-screen">
         <ResizablePanelGroup direction="horizontal">
@@ -23,7 +26,7 @@ const ProjectView = ({ projectId }: { projectId: string }) => {
             >   
             <ProjectHeader projectId={projectId}/>
 
-            {/* TODO MESSAGE CONTAINER */}
+            <MessageContainer projectId={projectId} activeFragment={activeFragment} setActiveFragment={setActiveFragment}/>
 
             </ResizablePanel>
             <ResizableHandle withHandle/>
