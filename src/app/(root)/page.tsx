@@ -1,18 +1,16 @@
-"use client"
 import { Button } from '@/components/ui/button'
-import { inngest } from '@/inngest/client'
-import ProjectForm from '@/modules/home/components/project-form'
+
+import ProjectsForm from '@/modules/home/components/project-form'
+import ProjectList from '@/modules/home/components/project-list'
 import Image from 'next/image'
 import React from 'react'
 
-const page = () => {
-  const onInvoke=async()=>{
-    await inngest.send({
-      name:"agent/hello"
-    })
-  }
+const Page = () => {
+
+
   return (
     <div className='flex items-center justify-center w-full px-4 py-8'>
+
       <div className='max-w-5xl w-full'>
         <section className='space-y-8 flex flex-col items-center'>
           <div className='flex flex-col items-center'>
@@ -24,15 +22,20 @@ const page = () => {
             className='hidden md:block invert dark:invert-0'
           />
           </div>
-          <h1 className='text-2xl md:text-5xl font-bold text-center'>Build Something with BuildUi ❤️‍🔥</h1>
-          <p className='text-lg md:text-xl text-muted-foreground text-center'>Create Websites with the help of Ai</p>
-          <div className='w-full max-w-3xl'>
-            <ProjectForm/>
+          <h1 className='text-2xl md:text-5xl font-bold text-center'>Build Something with 💓</h1>
+
+          <p className='text-lg md:text-xl text-muted-foreground text-center'>
+            Create apps and websites by chatting with AI
+          </p>
+
+          <div className='max-w-3xl w-full'>
+            <ProjectsForm/>
           </div>
+          <ProjectList/>
         </section>
       </div>
     </div>
   )
 }
 
-export default page
+export default Page
