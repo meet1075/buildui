@@ -3,6 +3,8 @@ import { MessageRole, MessageType } from "@/generated/prisma/enums";
 import db from "@/lib/db";
 import { inngest } from "@/inngest/client";
 import { getCurrentUser } from "@/modules/auth/actions";
+import { consumeCredits } from "@/lib/usage";
+import { AppError } from "@/lib/app-error";
 
 export const createMessage = async (Value: string, projectId: string) => {
   const user = await getCurrentUser();
@@ -14,6 +16,20 @@ export const createMessage = async (Value: string, projectId: string) => {
     },
   });
   if (!project) throw new Error("Project not found");
+
+ try {
+    await consumeCredits();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new AppError("BAD_REQUEST", "Something went wrong");
+    } else {
+      throw new AppError(
+        "TOO_MANY_REQUESTS",
+        "Too many requests, please try again later"
+      );
+    }
+  }
+
   const newMessage = await db.message.create({
     data: {
       projectId: project.id,

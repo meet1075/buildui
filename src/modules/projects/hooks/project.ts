@@ -20,7 +20,7 @@ export function useCreateProject(){
     return useMutation({
         mutationFn: async (value:string)=>createProject(value),
         onSuccess:()=>{
-            queryClient.invalidateQueries({queryKey:["projects"]})
+            queryClient.invalidateQueries({queryKey:["projects","status"]})
         }
     })
 }
