@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { format } from "date-fns";
+import { Response } from '@/components/ai-elements/response'
 interface Props {
   content: string
   role: MessageRole
@@ -97,7 +98,7 @@ const AssistantMessage = ({
         </span>
       </div>
       <div className="pl-8.5 flex flex-col gap-y-4">
-       <span>{content}</span>
+       <Response>{content}</Response>
        {fragment && type===MessageType.RESULT && (
             <FragmentCard
             fragment={fragment}
